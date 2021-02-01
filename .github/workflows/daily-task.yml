@@ -109,7 +109,9 @@ jobs:
       #if: ${{ env.ENABLE_UNICOM }}
       env:
         user: ${{secrets.unicom_user}}
+        user2: ${{secrets.unicom_user2}}:  
         password: ${{secrets.unicom_password}}
         appid: ${{secrets.unicom_appid}}
       run: node index.js unicom --user=${user} --password=${password} --appid=${appid} --tasks dailygameflow
+           node index.js unicom --user=${user2} --password=${password} --appid=${appid} --tasks dailygameflow
 
