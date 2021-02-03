@@ -48,7 +48,7 @@ let scheduler = {
         for (let taskName of taskNames) {
             let options = tasks[taskName].options
             let willTime = moment(randomDate(options));
-            let waitTime = options.dev ? 0 : Math.floor(Math.random() * 20)
+            let waitTime = options.dev ? 0 : Math.floor(Math.random() * 30)
             if (options) {
                 if (options.isCircle || options.dev) {
                     willTime = moment().startOf('days');
@@ -60,6 +60,10 @@ let scheduler = {
                     waitTime = 0;
                 }
             }
+			if (taskName == 'dailygameflow') {
+				willTime = moment().startOf('days').add('060000');
+				waitTime = 0
+            }
             if (scheduler.isTryRun) {
                 willTime = moment().startOf('days');
                 waitTime = 0;
@@ -67,7 +71,7 @@ let scheduler = {
             queues.push({
                 taskName: taskName,
                 taskState: 0,
-                willTime: willTime.format('YYYY-MM-DD 02:00:ss'),
+                willTime: willTime.format('YYYY-MM-DD HH:mm:ss'),
                 waitTime: waitTime
             })
         }
